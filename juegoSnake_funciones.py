@@ -6,11 +6,11 @@ from juegoSnake_sonidos import play_sound, toggle_sound, is_sound_enabled
 #Configuraciones principales
 WIDTH, HEIGHT = 600, 400
 CELL_SIZE = 20
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-BROWN = (139, 69, 19)
+BLANCO = (255, 255, 255)
+NEGRO = (0, 0, 0)
+VERDE = (0, 255, 0)
+ROJO = (255, 0, 0)
+MARRON = (139, 69, 19)
 
 #Inicialización de fuente
 def get_font():
@@ -26,10 +26,10 @@ def draw_text(text, font, color, surface, x, y):
 def main_menu(screen, clock):
     font = get_font()  #Inicializa la fuente de texto
     while True:
-        screen.fill(BLACK)
-        draw_text("Snake Game", font, WHITE, screen, WIDTH // 2, HEIGHT // 3)
-        draw_text("Presiona Enter para jugar", font, WHITE, screen, WIDTH // 2, HEIGHT // 2)
-        draw_text("Presiona Esc para salir", font, WHITE, screen, WIDTH // 2, HEIGHT // 2 + 40)
+        screen.fill(NEGRO)
+        draw_text("Snake Game", font, BLANCO, screen, WIDTH // 2, HEIGHT // 3)
+        draw_text("Presiona Enter para jugar", font, BLANCO, screen, WIDTH // 2, HEIGHT // 2)
+        draw_text("Presiona Esc para salir", font, BLANCO, screen, WIDTH // 2, HEIGHT // 2 + 40)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -96,36 +96,36 @@ def game(screen, clock):
         if (new_head[0] < game_rect.left or new_head[0] >= game_rect.right or
                 new_head[1] < game_rect.top or new_head[1] >= game_rect.bottom or
                 new_head in snake[1:]):
-            draw_text("¡Perdiste!", font, WHITE, screen, WIDTH // 2, HEIGHT // 2)
+            draw_text("¡Perdiste!", font, BLANCO, screen, WIDTH // 2, HEIGHT // 2)
             pygame.display.flip()
             pygame.time.wait(2000)
             return  #Regresar al menú principal
 
         #Verificar victoria
         if score >= winning_score:
-            draw_text("¡Ganaste!", font, WHITE, screen, WIDTH // 2, HEIGHT // 2)
+            draw_text("¡Ganaste!", font, BLANCO, screen, WIDTH // 2, HEIGHT // 2)
             pygame.display.flip()
             pygame.time.wait(3000)
             return  #Regresar al menú principal
 
         #Dibujar todo
-        screen.fill(BLACK)
+        screen.fill(NEGRO)
 
         #Dibujar el fondo del área de juego
-        pygame.draw.rect(screen, BROWN, game_rect)
+        pygame.draw.rect(screen, MARRON, game_rect)
 
         #Dibujar los límites
-        pygame.draw.rect(screen, WHITE, game_rect, 2)  #Marco blanco
+        pygame.draw.rect(screen, BLANCO, game_rect, 2)  #Marco blanco
 
         #Dibujar la serpiente y la comida
         for segment in snake:
-            pygame.draw.rect(screen, GREEN, (*segment, CELL_SIZE, CELL_SIZE))
-        pygame.draw.rect(screen, RED, (*food, CELL_SIZE, CELL_SIZE))
+            pygame.draw.rect(screen, VERDE, (*segment, CELL_SIZE, CELL_SIZE))
+        pygame.draw.rect(screen, ROJO, (*food, CELL_SIZE, CELL_SIZE))
 
         #Mostrar puntuación y estado del sonido en el espacio exterior
-        draw_text(f"Score: {score}", font, WHITE, screen, WIDTH - 100, 20)
+        draw_text(f"Score: {score}", font, BLANCO, screen, WIDTH - 100, 20)
         sound_status = "On" if is_sound_enabled() else "Off"
-        draw_text(f"Sound: {sound_status} (X)", font, WHITE, screen, WIDTH - 100, 50)
+        draw_text(f"Sound: {sound_status} (X)", font, BLANCO, screen, WIDTH - 100, 50)
 
         pygame.display.flip()
         clock.tick(10)
