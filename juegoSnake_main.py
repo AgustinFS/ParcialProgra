@@ -1,10 +1,9 @@
 import pygame
-import sys
-from juegoSnake_funciones import main_menu, game, WIDTH, HEIGHT
+from juegoSnake_funciones import main_menu, game
+from config import WIDTH, HEIGHT
 
 #Inicializar Pygame
 pygame.init()
-
 
 #Inicializar pantalla y reloj
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
