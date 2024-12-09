@@ -1,6 +1,7 @@
 import pygame
 import random
 import sys
+import os
 import json
 from pathlib import Path
 from config import *
@@ -17,12 +18,10 @@ def draw_text(text, font, color, surface, x, y):
     surface.blit(text_obj, text_rect)
 
 def load_rankings(file_path):
-    path = Path(file_path)
-    if path.is_file() and path.stat().st_size > 0:  #Verifica existencia y que no esté vacío
-        with path.open("r") as file:
-            content = file.read().strip()
-            return json.loads(content) if content else []
-    return []  #Si no existe o está vacío, devuelve lista vacía
+    if os.path.exists(file_path):  #Verifica si el archivo existe
+        with open(file_path, "r") as file:
+            return json.load(file)
+    return []
 
 #Función para guardar puntuaciones en rankings
 def save_ranking(player_name, score):
